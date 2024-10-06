@@ -16,6 +16,20 @@ export default function Profile() {
  
     }
 
+    const createBase = async () =>{
+        try {
+            const response = await fetch('/api/randomCreate');
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+            }
+            const data = await response.json();
+        } catch (error) {
+            console.error("獲取探索數據時出錯:", error);
+        } finally {
+        }
+ 
+    }
+
     return (
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Explore</h1>
@@ -38,6 +52,8 @@ export default function Profile() {
                 <p>some app settings</p>
             </div>
             <button className='bg-green-500' onClick={testMongo}>test</button>
+            <button className='bg-green-500' onClick={createBase}>create</button>
+
         </div>
     );
 }
