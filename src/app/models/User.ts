@@ -61,6 +61,6 @@ const userSchema: Schema = new mongoose.Schema({
 // 創建地理空間索引
 userSchema.index({ 'profile.location': '2dsphere' });
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.models.User || mongoose.model<IUser>('User', userSchema);
 
 export default User;

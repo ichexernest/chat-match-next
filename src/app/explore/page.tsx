@@ -5,7 +5,7 @@ import { useMatch } from '../hooks/useMatch'
 import { ExploreItem } from '../types';
 
 export default function Explore() {
-    const { items, loading, hasMore } = useExploreData()
+    const { items, loading } = useExploreData('')
     const {handleResult} = useMatch()
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -15,7 +15,6 @@ export default function Explore() {
         if(action === 'like'){
             //match
             handleResult(items[currentIndex].id, 'like')
-            if(items[currentIndex].hasLike){alert("Matched!")}
         }else{
             //mark as dislike
             handleResult(items[currentIndex].id, 'dislike')

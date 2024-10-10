@@ -1,35 +1,34 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IInteraction extends Document {
-  swiperId: mongoose.Types.ObjectId;
-  swipeeId: mongoose.Types.ObjectId;
-  type: 'like' | 'dislike' | 'block' | 'superlike';
-  timestamp: Date;
+  swiper: mongoose.Types.ObjectId;
+  swipee: mongoose.Types.ObjectId;
+  type: 'like' | 'dislike' | 'block' | 'superlike' | 'turbo';
+  createdAt: Date;
 }
 
 const interavtionSchema = new Schema({
-  swiperId: {
+  swiper: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  swipeeId: {
+  swipee: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
   type: {
     type: String,
-    enum: ['like', 'dislike','bolck', 'superlike'],
+    enum: ['like', 'dislike', 'superlike', 'block', 'turbo'],
     required: true
   },
-  timestamp: {
+  createdAt: {
     type: Date,
     default: Date.now 
   }
 });
 
-
-const Interaction = mongoose.model<IInteraction>('Interaction', interavtionSchema);
+const Interaction =mongoose.models.Interaction || mongoose.model<IInteraction>('Interaction', interavtionSchema);
 
 export default Interaction;

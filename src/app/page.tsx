@@ -1,36 +1,21 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Chatroom from "./chatroom/page";
-import Explore from "./explore/explore";
-import Profile from "./profile/page";
-import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
-  const [currentPage, setCurrentPage] = useState("explore");
+export default function App() {
+  const router = useRouter();
+  const handleStart = () =>{
+    //check auth
+    // navigate to login
+    router.push('/login');
+    // or navigate to home
+    //router.push('/login');
+  }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow">
-        {currentPage === "explore" && <Explore />}
-        {currentPage === "chatroom" && <Chatroom />}
-        {currentPage === "profile" && <Profile />}
-      </main>
+    <>
+      <button className="p-5 bg-slate-600 text-white m-5" onClick={() => handleStart()}> Let's Start</button>
+    </>
 
-      <nav className="bg-gray-800 text-white p-4">
-        <ul className="flex justify-around">
-          <li>
-            <button onClick={() => setCurrentPage("explore")}>Explore</button>
-          </li>
-          <li>
-            <button onClick={() => setCurrentPage("chatroom")}>Chatroom</button>
-          </li>
-          <li>
-            <button onClick={() => setCurrentPage("profile")}>Profile</button>
-          </li>
-        </ul>
-      </nav>
-    </div>
   );
 }

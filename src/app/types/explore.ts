@@ -2,7 +2,13 @@ export type ExploreItem = {
     id: string;
     name: string;
     age: number;
-    location: string;
-    description: string;
-    hasLike: boolean;
+    gender: string;
+    bio: string;
+    photos: string[];
+    interests: string[];
+    location: {
+        type: string;
+        coordinates: number[];
+    }
+    
 }

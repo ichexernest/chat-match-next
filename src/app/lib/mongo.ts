@@ -6,7 +6,7 @@ async function dbConnect (){
   if(connection.isConnect){
     return
   }
-  const db = await mongoose.connect(process.env.MONGO_URI!)
+  const db = await mongoose.connect(process.env.MONGODB_URI!)
   connection.isConnect = db.connections[0].readyState
 }
 

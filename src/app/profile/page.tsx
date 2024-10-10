@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 
 export default function Profile() {
@@ -29,6 +31,24 @@ export default function Profile() {
         }
  
     }
+
+
+    useEffect(() => {
+        const getProfile = async () =>{
+            try {
+                const response = await fetch(`/api/users/${"6702a352014e5221b6c64247"}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data)
+            } catch (error) {
+                console.error("獲取探索數據時出錯:", error);
+            } finally {
+            }
+        }
+        getProfile()
+    }, []);
 
     return (
         <div className="container mx-auto">
