@@ -1,10 +1,15 @@
-export default function Chatroom() {
+'use client'
+
+import NavLayout from "@/app/components/navLayout";
+
+export default function Recs() {
     const chatroomlist = [
         {id:1, name: "John", message: "Hello"},
         {id:2, name: "Jane", message: "Hi"},
         {id:3, name: "Doe", message: "What's up?"},
     ];
-  return <div className="container mx-auto">
+  return (<NavLayout>
+        <div className="container mx-auto">
     <h1 className="text-2xl font-bold">Chatroom</h1>
     <ul>
         {chatroomlist.map((chat) => (
@@ -19,5 +24,6 @@ export default function Chatroom() {
             </li>
         ))}
     </ul>
-  </div>;
+  </div>
+    </NavLayout>)
 }

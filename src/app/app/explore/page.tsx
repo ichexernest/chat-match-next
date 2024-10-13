@@ -1,8 +1,11 @@
+'use client'
+
 import { useState, useEffect } from 'react';
-import ExploreCard from '../components/exploreCard';
-import { useExploreData } from '../hooks/useExploreData'
-import { useMatch } from '../hooks/useMatch'
-import { ExploreItem } from '../types';
+import ExploreCard from '../../components/exploreCard';
+import { useExploreData } from '../../hooks/useExploreData'
+import { useMatch } from '../../hooks/useMatch'
+import { ExploreItem } from '../../types';
+import NavLayout from '@/app/components/navLayout';
 
 export default function Explore() {
     const { items, loading } = useExploreData('')
@@ -24,6 +27,7 @@ export default function Explore() {
     };
 
     return (
+        <NavLayout>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Explore</h1>
             {items.length > 0 && currentIndex < items.length ? (
@@ -37,6 +41,7 @@ export default function Explore() {
             )}
             {loading && <p className="text-center mt-4">載入中...</p>}
         </div>
+        </NavLayout>
     );
 }
 

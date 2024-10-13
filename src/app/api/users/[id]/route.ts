@@ -3,7 +3,7 @@ import dbConnect from '../../../lib/mongo';
 import User from '@/app/models/User';
 
 
-// 獲取單個用戶 (GET)
+// get users profile
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
@@ -17,8 +17,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 }
 
-// 更新單個用戶 (PUT)
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+// update users profile
+export async function PATCH(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
     const updatedUser = await User.findByIdAndUpdate(params.id, body, { new: true, runValidators: true });
@@ -31,7 +31,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-// 刪除單個用戶 (DELETE)
+// delete user
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     const deletedUser = await User.findByIdAndDelete(params.id);

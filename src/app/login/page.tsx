@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 export default function Login() {
     const router = useRouter();
     const handleLogin = () => {
-        router.push('/home');
+        router.push('/app/recs');
     }
 
     return (

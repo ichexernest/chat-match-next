@@ -1,5 +1,6 @@
 'use client'
 
+import NavLayout from '@/app/components/navLayout';
 import { useState, useEffect } from 'react';
 
 export default function Profile() {
@@ -7,6 +8,18 @@ export default function Profile() {
     const testMongo = async () =>{
         try {
             const response = await fetch('/api/users');
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+            }
+            const data = await response.json();
+        } catch (error) {
+            console.error("獲取探索數據時出錯:", error);
+        } finally {
+        }
+    }
+    const testLogin = async () =>{
+        try {
+            const response = await fetch('/api/auth/login');
             if (!response.ok) {
                 throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
             }
@@ -51,6 +64,7 @@ export default function Profile() {
     }, []);
 
     return (
+        <NavLayout>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Explore</h1>
             <div className='my-3'>
@@ -72,9 +86,10 @@ export default function Profile() {
                 <p>some app settings</p>
             </div>
             <button className='bg-green-500' onClick={testMongo}>test</button>
-            <button className='bg-green-500' onClick={createBase}>create</button>
+            <button className='bg-green-500' onClick={testLogin}>login</button>
 
         </div>
+        </NavLayout>
     );
 }
 
