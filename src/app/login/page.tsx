@@ -2,11 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../providers/authProvider';
 
 export default function Login() {
     const router = useRouter();
-    const handleLogin = () => {
-        router.push('/app/recs');
+    const { login } = useAuth();
+
+    const handleLogin = async () => {
+        try {
+            const response = await fetch(`/api/users/${"6702a352014e5221b6c64247"}`);
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data)
+            login(data)
+        } catch (error) {
+            console.error("獲取探索數據時出錯:", error);
+        } finally {
+            router.push('/app/recs');
+                }
     }
 
     return (

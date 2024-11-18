@@ -1,29 +1,23 @@
 "use client";
 
 import { createContext, useContext, useReducer, ReactNode } from 'react';
-
-// 定義用戶和上下文的類型
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { ActiveUser } from '@/app/types';
 
 interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
+  user: ActiveUser | null;
+  login: (userData: ActiveUser) => void;
   logout: () => void;
   isAuthenticated: boolean;
 }
 
 // 定義狀態的類型
 interface AuthState {
-  user: User | null;
+  user: ActiveUser | null;
 }
 
 // 定義 action 類型
 type AuthAction =
-  | { type: 'LOGIN'; payload: User }
+  | { type: 'LOGIN'; payload: ActiveUser }
   | { type: 'LOGOUT' };
 
 // 初始狀態
@@ -57,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // 登入函數
-  const login = (userData: User) => {
+  const login = (userData: ActiveUser) => {
     dispatch({ type: 'LOGIN', payload: userData });
     // 可以選擇將用戶存儲在 localStorage 中
     localStorage.setItem('user', JSON.stringify(userData));

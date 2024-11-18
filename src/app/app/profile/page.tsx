@@ -2,81 +2,26 @@
 
 import NavLayout from '@/app/components/navLayout';
 import { useState, useEffect } from 'react';
+import { useAuth } from '@/app/providers/authProvider';
 
 export default function Profile() {
 
-    const testMongo = async () =>{
-        try {
-            const response = await fetch('/api/users');
-            if (!response.ok) {
-                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
-            }
-            const data = await response.json();
-        } catch (error) {
-            console.error("獲取探索數據時出錯:", error);
-        } finally {
-        }
-    }
-    const testLogin = async () =>{
-        try {
-            const response = await fetch('/api/auth/login');
-            if (!response.ok) {
-                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
-            }
-            const data = await response.json();
-        } catch (error) {
-            console.error("獲取探索數據時出錯:", error);
-        } finally {
-        }
- 
-    }
-
-    const createBase = async () =>{
-        try {
-            const response = await fetch('/api/randomCreate');
-            if (!response.ok) {
-                throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
-            }
-            const data = await response.json();
-        } catch (error) {
-            console.error("獲取探索數據時出錯:", error);
-        } finally {
-        }
- 
-    }
-
-
-    useEffect(() => {
-        const getProfile = async () =>{
-            try {
-                const response = await fetch(`/api/users/${"6702a352014e5221b6c64247"}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
-                }
-                const data = await response.json();
-                console.log(data)
-            } catch (error) {
-                console.error("獲取探索數據時出錯:", error);
-            } finally {
-            }
-        }
-        getProfile()
-    }, []);
-
+    const { user } = useAuth();
     return (
         <NavLayout>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Explore</h1>
             <div className='my-3'>
-                <p>Avatar</p>
-                <p>Name</p>
+                <img src={user?.profile?.photos[0]} alt="" />
+                <p>{user?.profile?.name}</p>
+                <p>{user?._id}</p>
             </div>
             <div className='my-3'>
                 <p className='font-bold'>detail info</p>
-                <p>Location</p>
-                <p>Description</p>
-                <p>Age</p>
-                <p>Gentle</p>
+                <p>{user?.profile?.gender}</p>
+                <p>{user?.profile?.bio}</p>
+                <p>{user?.profile?.age}</p>
+                <p>{user?.profile?.interests}</p>
             </div>
             <div className='my-3'>
                 <p className='font-bold'>settings</p>
@@ -85,8 +30,6 @@ export default function Profile() {
                 <p>logout</p>
                 <p>some app settings</p>
             </div>
-            <button className='bg-green-500' onClick={testMongo}>test</button>
-            <button className='bg-green-500' onClick={testLogin}>login</button>
 
         </div>
         </NavLayout>

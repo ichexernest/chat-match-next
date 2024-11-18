@@ -13,7 +13,7 @@ export const useExploreData = (userId: string) => {
     const fetchExploreData = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await fetch(`/api/explore?userId=${userId}`);
+            const response = await fetch(`/api/recommendation?userId=${userId}`);
             if (!response.ok) {
                 throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
             }
