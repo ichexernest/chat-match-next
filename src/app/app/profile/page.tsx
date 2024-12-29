@@ -1,14 +1,11 @@
 'use client'
 
-import NavLayout from '@/app/components/navLayout';
-import { useState, useEffect } from 'react';
 import { useAuth } from '@/app/providers/authProvider';
 
 export default function Profile() {
 
     const { user } = useAuth();
     return (
-        <NavLayout>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Explore</h1>
             <div className='my-3'>
@@ -32,7 +29,6 @@ export default function Profile() {
             </div>
 
         </div>
-        </NavLayout>
     );
 }
 

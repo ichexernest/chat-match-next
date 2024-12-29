@@ -1,3 +1,4 @@
+import { Gender, Drinking, Smoking, Exercise, Prompt, StarSign } from '../types';
 export type ActiveUser = {
     _id: string;
     username: string;
@@ -6,14 +7,27 @@ export type ActiveUser = {
     profile: {
       name: string;
       age: number;
-      gender: string;
+      height: number;
+      job: string;
+      education: string;
+      drinking: Drinking;
+      smoking: Smoking;
+      starSign: StarSign;
+      political: string;
+      exercise: Exercise;
+      religion: string;
+      gender: Gender;
       bio: string;
       photos: string[];
       interests: string[];
+      coreValues: string[];
       location: {
         type: string;
+        city: string;
         coordinates: number[];
       };
+      prompts:{prompt:Prompt, answer:string}[];
+      questions: string[];
     };
     preferences: {
       preferredGenders: string | string[];

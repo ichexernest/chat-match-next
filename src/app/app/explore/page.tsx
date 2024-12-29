@@ -1,11 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import ExploreCard from '../../components/exploreCard';
+import ExploreCard from '../../components/ExploreCard';
 import { useExploreData } from '../../hooks/useExploreData'
 import { ExploreItem } from '../../types';
 import { useAuth } from '@/app/providers/authProvider';
-import NavLayout from '@/app/components/navLayout';
+import IconBtn from '@/app/components/IconBtn';
+import { RiFilter3Line } from "react-icons/ri";
+import { FaMask } from "react-icons/fa6";
+type ExploreCardProps = {
+  itemA: ExploreItem;
+  onLike: () => void;
+  onDislike: () => void;
+  onBlock: () => void;
+};
+
 
 export default function Explore() {
     const { user } = useAuth();
@@ -67,22 +76,45 @@ export default function Explore() {
     };
 
     return (
-        <NavLayout>
-        <div className="container mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Explore</h1>
-            {items.length > 0 && currentIndex < items.length ? (
+        <div className="container mx-auto flex flex-col items-center">
+          <div className='flex justify-between items-center w-full'>
+            <IconBtn icon={<FaMask />} hint='Who likes me' onClick={() => {}}></IconBtn>
+          <h1 className="text-2xl font-bold my-10">Explore</h1>
+          <IconBtn icon={<RiFilter3Line />} hint='Filter' onClick={() => {}}></IconBtn>
+          </div>
+          <div className='mt-10'>
+          {items.length > 0 && currentIndex < items.length ? (
                 <ExploreCard
-                item={items[currentIndex]}
-                onLike={() => handleInteraction('like')}
-                onDislike={() => handleInteraction('dislike')}
-                onBlock={() => handleInteraction('block')}
+                itemA={items[currentIndex]}
             />
             ) : (
                 <p>沒有更多項目了</p>
             )}
+          </div>
             {loading && <p className="text-center mt-4">載入中...</p>}
+            <div className="flex justify-center mt-3 gap-2">
+            <button
+              onClick={()=>handleInteraction('like')}
+              className="px-4 py-2 bg-red-500 text-white rounded"
+            >
+              不喜歡
+            </button>
+            <button
+              onClick={()=>handleInteraction('dislike')}
+
+              className="px-4 py-2 bg-yellow-500 text-white rounded"
+            >
+              超喜歡
+            </button>
+            <button
+              onClick={()=>handleInteraction('block')}
+
+              className=" px-4 py-2 bg-green-500 text-white rounded"
+            >
+              喜歡
+            </button>
+          </div>
         </div>
-        </NavLayout>
     );
 }
 
