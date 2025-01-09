@@ -8,6 +8,7 @@ import { useAuth } from '@/app/providers/authProvider';
 import IconBtn from '@/app/components/IconBtn';
 import { RiFilter3Line } from "react-icons/ri";
 import { FaMask } from "react-icons/fa6";
+import { useRouter } from 'next/navigation';
 type ExploreCardProps = {
   itemA: ExploreItem;
   onLike: () => void;
@@ -18,9 +19,15 @@ type ExploreCardProps = {
 
 export default function Explore() {
     const { user } = useAuth();
+    const router = useRouter();
+
     const { items, loading } = useExploreData('')
    // const {handleResult} = useMatch()
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handleNavigate = () => {
+      router.push(`/app/explore/liked`);
+  }
 
     const handleInteraction = async(action: 'like' | 'dislike' | 'block' | 'superlike' | 'turbo') => {
         // 這裡可以根據需要處理喜歡或不喜歡的邏輯
@@ -78,7 +85,7 @@ export default function Explore() {
     return (
         <div className="container mx-auto flex flex-col items-center">
           <div className='flex justify-between items-center w-full'>
-            <IconBtn icon={<FaMask />} hint='Who likes me' onClick={() => {}}></IconBtn>
+            <IconBtn icon={<FaMask />} hint='Who likes me' onClick={handleNavigate}></IconBtn>
           <h1 className="text-2xl font-bold my-10">Explore</h1>
           <IconBtn icon={<RiFilter3Line />} hint='Filter' onClick={() => {}}></IconBtn>
           </div>
