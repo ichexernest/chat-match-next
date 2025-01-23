@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 import ExploreCard from '../../components/ExploreCard';
 import { useExploreData } from '../../hooks/useExploreData'
-import { ExploreItem } from '../../types';
+import { ExploreItemFromZod } from '../../types';
 import { useAuth } from '@/app/providers/authProvider';
 import IconBtn from '@/app/components/IconBtn';
 import { RiFilter3Line } from "react-icons/ri";
 import { FaMask } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
 type ExploreCardProps = {
-  itemA: ExploreItem;
+  itemA: ExploreItemFromZod;
   onLike: () => void;
   onDislike: () => void;
   onBlock: () => void;
