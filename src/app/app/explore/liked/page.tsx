@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import MaskCard from '@/app/components/MaskCard';
 import { FaTimes } from 'react-icons/fa';
 import FullProfile from '@/app/components/FullProfile';
+import LikesButtons from '@/app/components/LikesBottons';
 type ExploreCardProps = {
   itemA: ExploreItemFromZod;
   onLike: () => void;
@@ -64,59 +65,6 @@ export default function Liked() {
     setExpand(true)
 }
 
-    const handleInteraction = async(action: 'like' | 'dislike' | 'block' | 'superlike' | 'turbo') => {
-        // 這裡可以根據需要處理喜歡或不喜歡的邏輯
-        console.log(`User ${action}d item:`, items[currentIndex]);
-        if(action === 'like'){
-            const response = await fetch('/api/interactions', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  swiper: user?._id, 
-                  swipee: items[currentIndex].id,  
-                  type: 'like'
-                }),
-              });
-            
-              const data = await response.json();
-              console.log(data);
-        }else if(action === 'dislike'){
-            const response = await fetch('/api/interactions', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  swiper: user?._id, 
-                  swipee: items[currentIndex].id,  
-                  type: 'dislike'
-                }),
-              });
-            
-              const data = await response.json();
-              console.log(data);
-        }else{
-            const response = await fetch('/api/interactions', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  swiper: user?._id, 
-                  swipee: items[currentIndex].id,  
-                  type: 'block'
-                }),
-              });
-            
-              const data = await response.json();
-              console.log(data);
-        }
-        // 移動到下一個項目
-        setCurrentIndex(prevIndex => prevIndex + 1);
-    };
-
     return (
       <div className='flex h-full'>
         <div className="container mx-auto flex flex-col items-center bg-slate-300">
@@ -131,35 +79,14 @@ export default function Liked() {
           ))}
         </div>
         </div>
-        <div className={`flex justify-center items-center flex-col bg-slate-600 ${expand ? 'w-[450px]' : 'w-0 hidden'}`}>
+        <div className={`flex justify-center items-center flex-col bg-slate-900 ${expand ? 'w-[450px]' : 'w-0 hidden'}`}>
           <button><FaTimes className="absolute top-9 right-9 text-3xl text-white" onClick={() => setExpand(false)} /></button>
-          <div className='overflow-auto'>
+          <div className='overflow-auto pb-5'>
           {/* <FullProfile item={items[currentIndex]} /> */}
           <FullProfile item={fItem} />
+          <LikesButtons user={user} item={fItem}/>
             </div>
           {loading && <p className="text-center mt-4">載入中...</p>}
-            <div className="flex justify-center mt-3 gap-2">
-            <button
-              onClick={()=>handleInteraction('like')}
-              className="px-4 py-2 bg-red-500 text-white rounded"
-            >
-              不喜歡
-            </button>
-            <button
-              onClick={()=>handleInteraction('dislike')}
-
-              className="px-4 py-2 bg-yellow-500 text-white rounded"
-            >
-              超喜歡
-            </button>
-            <button
-              onClick={()=>handleInteraction('block')}
-
-              className=" px-4 py-2 bg-green-500 text-white rounded"
-            >
-              喜歡
-            </button>
-          </div>
         </div>
       </div>
     );
