@@ -31,6 +31,11 @@ const matchSchema = new Schema({
     enum: ['like', 'superlike', 'turbo'],
     required: true
   },
+  type: {
+    type: String,
+    enum: ['classic', 'spark'],
+    required: true
+  },
   status: {
     type: String,
     enum: ['matched', 'unmatched', 'block'],

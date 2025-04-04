@@ -59,10 +59,10 @@ export default function Explore() {
         <div className="container mx-auto flex flex-col items-center">
           <div className='flex justify-between items-center w-full'>
             <IconBtn icon={<FaMask />} hint='Who likes me' onClick={handleNavigate}></IconBtn>
-          <h1 className="text-2xl font-bold my-10">Explore</h1>
+          <h1 className="text-2xl font-bold">Explore</h1>
           <IconBtn icon={<RiFilter3Line />} hint='Filter' onClick={() => {}}></IconBtn>
           </div>
-          <div className='mt-10'>
+          <div className=''>
           {items.length > 0 && currentIndex < items.length ? (
             <>
             <ExploreCard

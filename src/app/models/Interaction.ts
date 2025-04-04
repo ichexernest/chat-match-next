@@ -7,7 +7,7 @@ export interface IInteraction extends Document {
   createdAt: Date;
 }
 
-const interavtionSchema = new Schema({
+const interactionSchema = new Schema({
   swiper: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -20,6 +20,11 @@ const interavtionSchema = new Schema({
   },
   type: {
     type: String,
+    enum: ['classic', 'spark'],
+    required: true
+  },
+  status: {
+    type: String,
     enum: ['like', 'dislike', 'superlike', 'block', 'turbo'],
     required: true
   },
@@ -29,6 +34,6 @@ const interavtionSchema = new Schema({
   }
 });
 
-const Interaction =mongoose.models.Interaction || mongoose.model<IInteraction>('Interaction', interavtionSchema);
+const Interaction =mongoose.models.Interaction || mongoose.model<IInteraction>('Interaction', interactionSchema);
 
 export default Interaction;

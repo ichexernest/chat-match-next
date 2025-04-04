@@ -36,3 +36,31 @@ export enum StarSign {
     Scorpio = "scorpio",
     Aries = "aries",
 }
+
+export enum MatchInteractionType {
+    Like = "like",
+    Dislike = "dislike",
+    Superlike = "superlike",
+    Block = "block",
+    Turbo = "turbo",
+}
+
+export enum MatchStatus{
+    Matched = "matched",
+    Unmatched = "unmatched",
+    Block = "block",
+}
+
+export enum KindredyType{
+    Classic = "classic",
+    Spark = "spark",
+}
+
+export enum MatchPhase{
+    Prematch = "prematch", //剛配到
+    Waiting = "waiting", //等待對方確認
+    Prechat = "prechat", //限時聊天
+    Match = "match", //成功
+    Fail = "fail", //結束
+
+}
